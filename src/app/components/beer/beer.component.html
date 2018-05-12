@@ -1,0 +1,38 @@
+<div class="ui grid">
+  <div class="two column row">
+    <div class="eigth wide column">
+      <h1>{{ beer.name }}</h1>
+      <table class="ui celled padded table">
+        <tbody>
+          <tr>
+            <td>
+              <div><h3>Tipo:</h3></div>
+              <div><h3>{{ category.name }}</h3></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><h3>Estilo:</h3></div>
+              <div><h3>{{ beer | sinEstilo }}</h3></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><h3>Alcohol por volumen</h3></div>
+              <div><h3>{{ beer.abv }}%</h3></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><h3>Description: </h3></div>
+              <div><h3>{{beer.description}}</h3></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="eigth wide column">
+      <img [src]="beer | sinfoto" [alt]="beer.name">
+    </div>
+  </div>
+</div>

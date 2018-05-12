@@ -1,3 +1,36 @@
-<p>
-  search works!
-</p>
+<div class="ui form">
+  <div class="field">
+    <label>Buscar XD</label>
+    <input [(ngModel)]="search"
+      (keyup)="searchBeer()"
+      type="text" placeholder="Buscar" name="search"
+    >
+  </div>
+</div>
+
+<div class="ui special cards">
+  <div class="card" *ngFor="let beer of _beerService.beers">
+    <div class="blurring dimmable image">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+            <div class="ui inverted button">More Info.</div>
+          </div>
+        </div>
+      </div>
+      <img [src]="beer | sinfoto" [alt]="beer.name">
+    </div>
+    <div class="content">
+      <a class="header" [routerLink]="['/beer', beer.id]" >{{ beer.name }}</a>
+      <div class="meta">
+        <span class="date">{{ beer | sinEstilo }}</span>
+      </div>
+    </div>
+    <div class="extra content">
+      <a>
+        <i class="users icon"></i>
+        {{beer.abv}}% Alcohol por volumen
+      </a>
+    </div>
+  </div>
+</div>

@@ -9,10 +9,12 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class BeerService {
 
-    API_KEY:string = 'fd1fa787b326a567caff5147ea8ea394';
-    URL:string = '/api/v2';
+  API_KEY:string = 'fd1fa787b326a567caff5147ea8ea394';
+  URL:string = '/api/v2';
 
-   category: any = {};
+   category: any[] = [];
+   beers: any[] = [];
+   beer:any[] = [];
 
   constructor(public http: Http) { }
 
@@ -29,11 +31,32 @@ export class BeerService {
 
     return this.http.get(url).map(
       (resp:any)=>{
-        this.category = resp
+        this.category = resp.json().data
         return this.category
       }
     )
+  }
 
+  getCategoryId(id:string):Observable<any>{
+    let url:string= `${this.URL}/category/${id}?key=${this.API_KEY}`;
+    return this.http.get(url).map(
+      resp => resp.json().data
+    )
+  }
+
+  getbeers(search:string):Observable<any>{
+    let url:string = `${this.URL}/search?q=${search}&type=beer&key=${this.API_KEY}`
+    return this.http.get(url).map(
+      (resp:any)=>{
+        this.beers = resp.json().data
+        return this.beers
+      }
+    )
+  }
+
+  getbeer(id:string):Observable<any>{
+    let url = `${this.URL}/beer/${id}?key=${this.API_KEY}`
+    return this.http.get(url)
   }
 
 }
